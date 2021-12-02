@@ -1,0 +1,106 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mt-4">
+      <h1 class="text-center">User List</h1>
+      <table class="table table-bordered table-striped table-hover">
+        <thead>
+          <tr>
+            <th class="text-center">ID</th>
+            <th class="text-center">First Name</th>
+            <th class="text-center">Last Name</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Password</th>
+            <th class="text-center">&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{ user.id }}</td>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.password }}</td>
+
+            <td>
+              <button type="button" class="btn btn-info btn-sm mr-2" (click)="showEditUserForm(user)">Edit</button>
+
+              <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-danger btn-sm"  >Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+
+      <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Alert!!!!!!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" *ngFor="let user of users">
+        <h1>Are You Sure???? <samp>{{ user.firstName }}</samp></h1>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button"  class="btn btn-primary"  >Delete</button> <!--(click)="removeUser(user)"-->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+      <button class="btn btn-success"  (click)="showAddUserForm()">Add New User</button>
+
+      <div class="mt-4">
+        <form *ngIf="userForm">
+          <h2>Add New User</h2>
+          <p>First Name: <input type="text" name="firstName" [(ngModel)]="newUser.firstName" /></p>
+          <p>Last Name: <input type="text" name="lastName" [(ngModel)]="newUser.lastName" /></p>
+          <p>Email : <input type="text" name="email" [(ngModel)]="newUser.email" /></p>
+          <p>password <input type="text" name="email" [(ngModel)]="newUser.password" /></p>
+          <p>
+            <button type="button" class="btn btn-primary mr-2" (click)="saveUser(newUser)">Submit</button>
+            <button type="button" class="btn btn-warning" (click)="cancelNewUser()">Cancel</button>
+          </p>
+        </form>
+
+        <form *ngIf="editUserForm">
+          <h2>Edit User Details</h2>
+          <p>First Name: <input type="text" name="firstName" [(ngModel)]="editedUser.firstName" /></p>
+          <p>Last Name: <input type="text" name="lastName" [(ngModel)]="editedUser.lastName" /></p>
+          <p>Email: <input type="text" name="lastName" [(ngModel)]="editedUser.email" /></p>
+          <p>password <input type="text" name="email" [(ngModel)]="newUser.password" /></p>
+          <p>
+            <button type="button" class="btn btn-primary mr-2" (click)="updateUser()">Submit</button>
+            <button type="button" class="btn btn-warning" (click)="cancelEdits()">Cancel</button>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<form class="example-form">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Favorite food</mat-label>
+    <input matInput placeholder="Ex. Pizza" value="Sushi">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Leave a comment</mat-label>
+    <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+  </mat-form-field>
+  
+</form>
